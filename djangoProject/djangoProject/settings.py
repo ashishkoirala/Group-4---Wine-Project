@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-jw7d!_463(j#)9wjp950p1qm-44=d9dtd&=t@ksoj!*+py^4w7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'local host',
+    'wine-predictor.onrender.com',
+]
 
 
 # Application definition
@@ -37,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp.apps.MyappConfig',
+    'myapp',
 ]
 
 MIDDLEWARE = [
