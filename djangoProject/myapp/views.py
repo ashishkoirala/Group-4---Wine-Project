@@ -53,6 +53,6 @@ def recommendation(request):
         print("Steph testing")
         # call into database using filters
         result = "french wine, german wine, italian wine, "
-        return render(request, 'myapp/maintenance.html', context={})
+        return render(request, 'myapp/recommendation.html', context={})
     else:
         return render(request, 'myapp/recommendation.html', context=context)
