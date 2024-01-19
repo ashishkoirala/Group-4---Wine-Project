@@ -1,7 +1,6 @@
 
 from datetime import datetime
 from django.shortcuts import render
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Wine
@@ -47,3 +46,13 @@ def import_csv(request):
         return render(request, 'myapp/import_csv.html')
 
 # View for Model 2:To scrape the prices from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
+
+def recommendation(request):
+    context = {'time': datetime.now()}
+    if request.method == 'POST':
+        print("Steph testing")
+        # call into database using filters
+        result = "french wine, german wine, italian wine, "
+        return render(request, 'myapp/maintenance.html', context={})
+    else:
+        return render(request, 'myapp/recommendation.html', context=context)

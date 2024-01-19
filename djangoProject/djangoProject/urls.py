@@ -25,5 +25,6 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
+    path('recommendation/', views.recommendation, name='recommendation'),
     path('winedb/import/', views.import_csv, name='import_csv'),
 ]
