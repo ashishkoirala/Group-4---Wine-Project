@@ -21,7 +21,9 @@ from django.contrib import admin
 from django.urls import path
 from myapp import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
+    path('winedb/import/', views.import_csv, name='import_csv'),
 ]
