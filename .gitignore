@@ -1,3 +1,5 @@
 *.pyc
 __pycahe__
 .DS_Store
+.idea
+.venv
