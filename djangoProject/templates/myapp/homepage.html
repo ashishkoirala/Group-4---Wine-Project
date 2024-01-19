@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Find Your Perfect Wine</title>
-</head>
-<body>
-    {{ time }}
-    <header>
-        <h1>Welcome to Wine Predictor!</h1>
-    </header>
-    
-    <main>
-        <p>Discover your ideal wine match. Stay tuned for our interactive quiz coming soon!</p>
-    </main>
+{% extends "myapp/base.html" %}
 
-    <footer>
-        <p>Contact us at: contact@winepredictor.com</p>
-    </footer>
-</body>
-</html>
+{% block title %}Welcome to Wine Predictor!{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>Welcome to Wine Predictor!</h1>
+    <p class="subtitle">Discover your ideal wine match. </p>
+    <div class="start-button">
+        <a href="https://example.com" class="button">Start Now</a> <!-- Replace with your desired URL -->
+    </div>
+</div>
+{% endblock %}
+
