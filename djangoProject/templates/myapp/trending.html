@@ -5,19 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Wine Predictor{% endblock %}</title>
-    <link rel="stylesheet" href="/static/myapp/style.css">
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'admin:index' %}">Admin Login</a></li>
-        </ul>
-    </nav>
-
-</head>
-
-<head>
-    <title>Top Trending Wines</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,73 +17,35 @@
             color: #dcdcdc; /* Light gray text color */
             text-align: center;
         }
-        .container {
-            padding: 50px;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        .header {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 1px;
+            margin-bottom: 1px; /* Spacing between the header and the rest of the content */
+            border-radius: 10px; /* Rounded corners for the box */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); /* Box shadow for a 3D effect */
         }
-        .region-selector {
-            margin-bottom: 20px;
+        .header h1 {
+            color: #a52a2a; /* Wine color for the header */
         }
-        h1 {
-            font-size: 24px; /* Smaller font size */
-            color: #a52a2a; /* Wine color */
+        .subtitle {
+            color: #333333; /* Darker text for the subtitle */
         }
-        h2 {
-            color: #a52a2a; /* Wine color */
-        }
-        ol {
-            list-style-position: inside;
-        }
-        li {
-            font-size: 20px;
-            margin: 10px 0;
-        }
-        select, input[type="submit"] {
-            margin-top: 10px;
-            font-size: 16px;
-            padding: 5px;
-        }
-        .form-container select, .form-container input[type="submit"] {
-            font-size: 16px;
-            padding: 5px 10px;
-            margin: 5px;
-            border-radius: 5px;
-            border: 1px solid #a52a2a;
-        }
-        .form-container input[type="submit"] {
+        .button {
+            padding: 10px 20px;
             background-color: #a52a2a;
             color: white;
-            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
         }
-        .form-container input[type="submit"]:hover {
+        .button:hover {
             background-color: #8b3a3a;
         }
+        /* Other styles remain the same */
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="region-selector">
-            <h1>Choose Your Region</h1>
-            <form action="" method="get" class="form-container">
-                <select name="region" id="region">
-                    <option value="US">United States</option>
-                    <option value="FR">France</option>
-                    <option value="IT">Italy</option>
-                    <option value="ES">Spain</option>
-                    <option value="AU">Australia</option>
-                    <!-- Add more regions as needed -->
-                </select>
-                <input type="submit" value="Show Trends">
-            </form>
-        </div>
-
-        <h2>Top 3 Popular Wines in {{ selected_region }}</h2>
-        <ol>
-            {% for wine, score in trending_wines.items %}
-                <li>{{ wine }} (Popularity Score: {{ score }})</li>
-            {% endfor %}
-        </ol>
-    </div>
 
 <div class="header">
     <h1>Welcome to Wine Predictor!</h1>
@@ -102,6 +53,37 @@
     <div class="start-button">
         <a href="{% url 'recommendation' %}" class="button">Start Now</a>
     </div>
+</div>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'admin:index' %}">Admin Login</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="region-selector">
+        <h1>Choose Your Region</h1>
+        <form action="" method="get" class="form-container">
+            <select name="region" id="region">
+                <option value="US">United States</option>
+                <option value="FR">France</option>
+                <option value="IT">Italy</option>
+                <option value="ES">Spain</option>
+                <option value="AU">Australia</option>
+                <!-- Add more regions as needed -->
+            </select>
+            <input type="submit" value="Show Trends">
+        </form>
+    </div>
+
+    <h2>Top 3 Popular Wines in {{ selected_region }}</h2>
+    <ol>
+        {% for wine, score in trending_wines.items %}
+            <li>{{ wine }} (Popularity Score: {{ score }})</li>
+        {% endfor %}
+    </ol>
 </div>
 
 </body>
