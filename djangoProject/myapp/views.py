@@ -39,11 +39,14 @@ def import_csv(request):
                     'brand_name': row['Brand Name'],
                     'wine_sweetness': row['Wine Sweetness'],
                     'wine_body': row['Wine Body'],
-                    'food_match': row['Food Match']
+                    'food_match': row['Food Match'],
+                    'rating': row['Rating']
                 }
             )
         return HttpResponse("CSV file imported successfully")
     else:
         return render(request, 'myapp/import_csv.html')
 
-# View for Model 2:To scrape the prices from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
+# View for Model 2:To collect user preferences and give recommendations
+
+
