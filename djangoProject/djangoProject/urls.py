@@ -24,7 +24,6 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('preferences/', views.wine_preferences, name='wine_preferences'),
     path('', views.trending_view, name='trendinghome'),  # Add this line for the root URL
     path('trending/', views.trending_view, name='trending'),  # Keeps the trending URL as well
     path('',views.home,name='home'),
