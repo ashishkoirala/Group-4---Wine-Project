@@ -24,8 +24,10 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.trending_view, name='trendinghome'),  # Add this line for the root URL
+    path('trending/', views.trending_view, name='trending'),  # Keeps the trending URL as well
     path('',views.home,name='home'),
     path('recommendation/', views.recommendation, name='recommendation'),
     path('winedb/import/', views.import_csv, name='import_csv'),
-    # path('submit_form/', views.recommendation, name='submit_form'),
+    path('submit_form/', views.recommendation, name='submit_form'),
 ]
