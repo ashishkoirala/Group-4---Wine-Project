@@ -1,17 +1,22 @@
-
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 
-from .forms import WinePreferenceForm
+from . import utils
+
 from .models import Wine
 import csv
 from io import TextIOWrapper
 from pytrends.request import TrendReq
-from django.shortcuts import render
 
-# View for Model 1:To upload the .csv file scrapped from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
+# Create your views here.
+def home(request):
+    cur_time = datetime.now()
+    context = {}
+    context['time'] = cur_time
+    return render(request, 'myapp/homepage.html', context=context)
+
 
 @staff_member_required
 def import_csv(request):
@@ -42,62 +47,29 @@ def import_csv(request):
     else:
         return render(request, 'myapp/import_csv.html')
 
-# View for Model 2:To collect user preferences and give recommendations
+# View for Model 2:To scrape the prices from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
 
-def wine_preferences(request):
-    form = WinePreferenceForm()
-    return render(request, 'myapp/wine_preferences.html', {'form': form})
 
-def wine_recommendation(request):
+def recommendation(request):
+    context = {'time': datetime.now()}
     if request.method == 'POST':
-        form = WinePreferenceForm(request.POST)
-        if form.is_valid():
-            # Extract data from the form
-            # ... other form data ...
-            alcohol_query = form.cleaned_data.get('alcohol_content')
-
-            # Fetch all wines
-            wines = Wine.objects.all()
-
-            # Convert wines QuerySet to list for Python-side processing
-            wines_list = list(wines)
-
-            # Define a function to strip the '%' and convert to float
-            def parse_alcohol_volume(wine):
-                try:
-                    return float(wine.alcohol_volume.strip('%'))
-                except ValueError:
-                    return None
-
-            # Filter by alcohol content in Python
-            def alcohol_filter(wine):
-                alcohol_percentage = parse_alcohol_volume(wine)
-                if alcohol_percentage is None:
-                    return False  # Skip wines with invalid alcohol_volume data
-                if alcohol_query == '<8':
-                    return alcohol_percentage < 8
-                elif alcohol_query == '8-15':
-                    return 8 <= alcohol_percentage <= 15
-                elif alcohol_query == '>15':
-                    return alcohol_percentage > 15
-                return True  # Include all wines if no specific alcohol query is selected
-
-            wines_filtered = [wine for wine in wines_list if alcohol_filter(wine)]
-
-            # ... other filters ...
-            # Apply sweetness, body, and food filters on wines_filtered
-
-            # Get the top-rated wines separately
-            top_rated_wines = sorted(wines_filtered, key=lambda wine: wine.rating, reverse=True)[:3]
-
-            # Render the recommendations page
-            return render(request, 'myapp/wine_recommendations.html', {
-                'wines': wines_filtered,
-                'top_rated_wines': top_rated_wines
-            })
-
+        selected_sweetness = request.POST["sweetness"]
+        selected_vintage = request.POST["vintage"]
+        selected_body = request.POST["body"]
+        selected_pairing = request.POST["pairing"]
+        selected_quantity = request.POST["quantity"]
+        selected_alcohol_content = request.POST["alcohol_content"]
+        print("selected sweetness is " + selected_sweetness)
+        print("selected vintage is " + selected_vintage)
+        print("selected_body is " + selected_body)
+        print("selected pairing is " + selected_pairing)
+        print("selected_alcohol_content is " + selected_alcohol_content)
+        # call into database using filters
+        recommended_wines = utils.get_wines(selected_sweetness, selected_vintage, selected_body, selected_pairing, selected_quantity, selected_alcohol_content)
+        print(recommended_wines)
+        return render(request, 'myapp/recommendation.html', {'my_list': recommended_wines})
     else:
-        return wine_preferences(request)
+        return render(request, 'myapp/recommendation.html', context=context)
 
 def trending_view(request):
     selected_region = request.GET.get('region')  # Get the selected region from the request

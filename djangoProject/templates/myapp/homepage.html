@@ -1,14 +1,23 @@
 {% extends "myapp/base.html" %}
 
+{% load static %}  <!-- Load the static files -->
+
 {% block title %}Welcome to Wine Predictor!{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        background-image: url("{% static 'images/wine_background.jpg' %}");
+        background-size: cover;  /* Cover the entire viewport */
+        background-repeat: no-repeat;  /* Do not repeat the image */
+    }
+</style>
+
 <div class="header">
     <h1>Welcome to Wine Predictor!</h1>
-    <p class="subtitle">Discover your ideal wine match. </p>
+    <p class="subtitle">Discover your ideal wine match.</p>
     <div class="start-button">
-        <a href="{% url 'wine_preferences' %}" class="button">Start Now</a><!-- Replace with your desired URL -->
+        <a href="{% url 'recommendation' %}" class="button">Start Now</a>
     </div>
 </div>
 {% endblock %}
-

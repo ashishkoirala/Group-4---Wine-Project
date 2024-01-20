@@ -20,14 +20,15 @@ from django.urls import path
 from django.contrib import admin
 from django.urls import path
 from myapp import views
-from myapp.views import wine_preferences
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('winedb/import/', views.import_csv, name='import_csv'),
     path('preferences/', views.wine_preferences, name='wine_preferences'),
     path('', views.trending_view, name='trendinghome'),  # Add this line for the root URL
     path('trending/', views.trending_view, name='trending'),  # Keeps the trending URL as well
-    path('recommendations/', views.wine_recommendation, name='wine_recommendation'),
+    path('',views.home,name='home'),
+    path('recommendation/', views.recommendation, name='recommendation'),
+    path('winedb/import/', views.import_csv, name='import_csv'),
+    path('submit_form/', views.recommendation, name='submit_form'),
 ]
