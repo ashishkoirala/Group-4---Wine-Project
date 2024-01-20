@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 
 from . import utils
+
 from .models import Wine
 import csv
 from io import TextIOWrapper
@@ -37,7 +38,8 @@ def import_csv(request):
                     'brand_name': row['Brand Name'],
                     'wine_sweetness': row['Wine Sweetness'],
                     'wine_body': row['Wine Body'],
-                    'food_match': row['Food Match']
+                    'food_match': row['Food Match'],
+                    'rating': row['Rating']
                 }
             )
         return HttpResponse("CSV file imported successfully")

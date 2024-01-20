@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wine Predictor{% endblock %}</title>
+    <link rel="stylesheet" href="/static/myapp/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        <!-- Main content goes here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="date">
+            <p>Jan. 19, 2024, 1:39 p.m.</p>
+        </div>
+        <div class="contact">
+            <p>Contact us at: <a href="mailto:contact@winepredictor.com">contact@winepredictor.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>
+
+

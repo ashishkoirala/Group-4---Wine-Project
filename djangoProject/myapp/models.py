@@ -1,5 +1,4 @@
 # Create your models here.
-
 # Model 1: To upload the .csv file scrapped from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
 
 from django.db import models
@@ -20,6 +19,7 @@ class Wine(models.Model):
     wine_sweetness = models.CharField(max_length=50)
     wine_body = models.CharField(max_length=50)
     food_match = models.CharField(max_length=100)
+    rating = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.product_name

@@ -1,0 +1,10 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+    <h1>Find Your Wine Match</h1>
+    <form method="post" action="{% url 'wine_recommendation' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Find Wines</button>
+    </form>
+{% endblock %}

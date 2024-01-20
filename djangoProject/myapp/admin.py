@@ -27,7 +27,8 @@ def import_csv(modeladmin, request, queryset):
                     brand_name=row['Brand Name'],
                     wine_sweetness=row['Wine Sweetness'],
                     wine_body=row['Wine Body'],
-                    food_match=row['Food Match']
+                    food_match=row['Food Match'],
+                    rating=row['Rating'],
                 )
 
 class WineAdmin(admin.ModelAdmin):
