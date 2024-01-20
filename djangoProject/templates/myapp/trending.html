@@ -2,6 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wine Predictor{% endblock %}</title>
+    <link rel="stylesheet" href="/static/myapp/style.css">
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin Login</a></li>
+        </ul>
+    </nav>
+
+</head>
+
+<head>
     <title>Top Trending Wines</title>
     <style>
         body {
@@ -80,5 +95,14 @@
             {% endfor %}
         </ol>
     </div>
+
+<div class="header">
+    <h1>Welcome to Wine Predictor!</h1>
+    <p class="subtitle">Discover your ideal wine match.</p>
+    <div class="start-button">
+        <a href="{% url 'recommendation' %}" class="button">Start Now</a>
+    </div>
+</div>
+
 </body>
 </html>
