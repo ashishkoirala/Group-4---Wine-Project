@@ -3,14 +3,11 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
-from flask import Flask, request, render_template
 
 from . import utils
 from .models import Wine
 import csv
 from io import TextIOWrapper
-
-app = Flask(__name__)
 
 # Create your views here.
 def home(request):
@@ -59,33 +56,15 @@ def recommendation(request):
         selected_body = request.POST["body"]
         selected_pairing = request.POST["pairing"]
         selected_quantity = request.POST["quantity"]
+        selected_alcohol_content = request.POST["alcohol_content"]
         print("selected sweetness is " + selected_sweetness)
         print("selected vintage is " + selected_vintage)
         print("selected_body is " + selected_body)
         print("selected pairing is " + selected_pairing)
+        print("selected_alcohol_content is " + selected_alcohol_content)
         # call into database using filters
-        recommended_wines = utils.get_wines(selected_sweetness, selected_vintage, selected_body, selected_pairing, selected_quantity)
+        recommended_wines = utils.get_wines(selected_sweetness, selected_vintage, selected_body, selected_pairing, selected_quantity, selected_alcohol_content)
         print(recommended_wines)
         return render(request, 'myapp/recommendation.html', {'my_list': recommended_wines})
     else:
         return render(request, 'myapp/recommendation.html', context=context)
-
-# @app.route('/recommendation', methods=['GET', 'POST'])
-# def submit_form():
-#     # Access form data using request.form
-#     quantity = request.form.get('quantity')
-#     # sweetness = request.form.get('sweetness')
-#     # body = request.form.get('body')
-#     # alcohol_content = request.form.get('alcohol-content')
-#     # age = request.form.get('age')
-#     # pairing = request.form.get('pairing')
-#     # Now you can process the form data or store it in a database
-#     # For example, you can generate recommendations based on user input
-#     print("Steph testing")
-#     # call into database using filters
-#     utils.get_wines()
-#     # Return a response, e.g., rendering a template with recommendations
-#     return render_template('myapp/recommendation.html')
-#
-# if __name__ == '__main__':
-#     app.run(debug=True)
