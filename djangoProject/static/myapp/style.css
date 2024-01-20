@@ -116,5 +116,36 @@ body {
 }
 .subtitle {
     /* Existing styles */
-    margin-bottom: 140px; /* This is padding between button and the para */
+    margin-bottom: 140px; /* This is padding between button and the para at home button*/
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: ;
+}
+
+tr:nth-child(even) {background-color: ;}
+
+tr:hover {background-color: #4a2525;}
+
+.btn-primary {
+    color: white;
+    background-color: blue;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: navy;
 }

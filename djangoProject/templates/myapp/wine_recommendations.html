@@ -1,0 +1,23 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+    <h1>Highly Rated Wines For You</h1>
+    <table>
+        <tr>
+            <th>Name of Wine</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Buy Now</th>
+        </tr>
+        {% for wine in top_rated_wines %}
+        <tr>
+            <td>{{ wine.product_name }}</td>
+            <td>${{ wine.price }}</td>
+            <td>{{ wine.quantity }}</td>
+            <td><a href="{{ wine.product_link }}" class="btn-buy-now" target="_blank">Buy Now</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+
