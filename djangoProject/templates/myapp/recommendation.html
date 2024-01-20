@@ -23,12 +23,12 @@
         <h3 class="mb-3 custom-font">I'm looking for a</h3>
 
         <div class="form-group">
-            <select class="form-control custom-font" id="quantity">
-                <option value="single bottle">single bottle</option>
-                <option value="pack of 2">pack of 2</option>
-                <option value="pack of 3">pack of 3</option>
-                <option value="pack of 6">pack of 6</option>
-                <option value="pack of 12">pack of 12</option>
+            <select class="form-control custom-font" id="quantity" name="quantity">
+                <option value="each">single bottle</option>
+                <option value="pack (2)">pack of 2</option>
+                <option value="pack (3)">pack of 3</option>
+                <option value="pack (6)">pack of 6</option>
+                <option value="pack (12)">pack of 12</option>
             </select>
         </div>
 
@@ -36,18 +36,18 @@
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <select class="form-control custom-font" id="sweetness">
-                    <option value="dry">dry</option>
-                    <option value="semi sweet">semi-sweet</option>
-                    <option value="sweet">sweet</option>
+                <select class="form-control custom-font" id="sweetness" name="sweetness">
+                    <option value="Dry">Dry</option>
+                    <option value="Semi Sweet">Semi Sweet</option>
+                    <option value="Sweet">Sweet</option>
                 </select>
             </div>
             ,
             <div class="form-group col-md-4">
-                <select class="form-control custom-font" id="body">
-                    <option value="light bodied">light bodied</option>
-                    <option value="medium bodied">medium bodied</option>
-                    <option value="full bodied">full bodied</option>
+                <select class="form-control custom-font" id="body" name="body">
+                    <option value="Light Bodied">light bodied</option>
+                    <option value="Medium Bodied">medium bodied</option>
+                    <option value="Full Bodied">full bodied</option>
                 </select>
             </div>
             ,
@@ -60,23 +60,23 @@
             </div>
             alcohol content, and &nbsp
             <div class="form-group">
-                <select class="form-control custom-font" id="age">
-                    <option value="vintage">vintage</option>
-                    <option value="non-vintage">non-vintage</option>
+                <select class="form-control custom-font" id="age" name="vintage">
+                    <option value="Vintage">vintage</option>
+                    <option value="Non Vintage">non-vintage</option>
                 </select>
             </div>
             &nbsp
             <h3 class="mt-3 custom-font">that pairs well with &nbsp</h3>
 
             <div class="form-group">
-                <select class="form-control custom-font" id="pairing">
-                    <option value="antipasto">antipasto</option>
-                    <option value="beef">beef</option>
-                    <option value="cheese">cheese</option>
-                    <option value="chicken">chicken</option>
-                    <option value="game">game</option>
-                    <option value="lamb">lamb</option>
-                    <option value="seafood">seafood</option>
+                <select class="form-control custom-font" id="pairing" name="pairing">
+                    <option value="Antipasto">antipasto</option>
+                    <option value="Beef">beef</option>
+                    <option value="Cheese">cheese</option>
+                    <option value="Chicken">chicken</option>
+                    <option value="Game">game</option>
+                    <option value="Lamb">lamb</option>
+                    <option value="Seafood">seafood</option>
                 </select>
             </div>
 
@@ -90,26 +90,33 @@
         </form>
     </div>
 
+
 <div class="container mt-5">
     <h1 class="custom-font">Recommendations</h1>
     <div id="recommendationText" class="mt-3 custom-font"></div>
 </div>
+
+<ul>
+    {% for item in my_list %}
+        <li><a href="{{ item.link }}">{{ item.name }}</a>, price is ${{ item.price }} </li>
+    {% endfor %}
+</ul>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        // Handle form submission
-        $('form').submit(function (event) {
-            event.preventDefault(); // Prevent the default form submission behavior
-            // Replace the text below with your recommendation logic
-            $('#recommendationText').html("Here's your recommendation.");
-        });
-    });
-</script>
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#        // Handle form submission#}
+{#        $('form').submit(function (event) {#}
+{#            //event.preventDefault(); // Prevent the default form submission behavior#}
+{#            // Replace the text below with your recommendation logic#}
+{#            $('#recommendationText').html("Here's your recommendation.");#}
+{#        });#}
+{#    });#}
+{#</script>#}
 
 </body>
 </html>

@@ -27,4 +27,5 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('recommendation/', views.recommendation, name='recommendation'),
     path('winedb/import/', views.import_csv, name='import_csv'),
+    # path('submit_form/', views.recommendation, name='submit_form'),
 ]

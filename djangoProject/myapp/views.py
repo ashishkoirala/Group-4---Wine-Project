@@ -3,10 +3,14 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
+from flask import Flask, request, render_template
+
+from . import utils
 from .models import Wine
 import csv
 from io import TextIOWrapper
 
+app = Flask(__name__)
 
 # Create your views here.
 def home(request):
@@ -15,7 +19,6 @@ def home(request):
     context['time'] = cur_time
     return render(request, 'myapp/homepage.html', context=context)
 
-# View for Model 1:To upload the .csv file scrapped from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
 
 @staff_member_required
 def import_csv(request):
@@ -47,12 +50,42 @@ def import_csv(request):
 
 # View for Model 2:To scrape the prices from 'https://www.danmurphys.com.au/list/wine?filters=country(italy)'
 
+
 def recommendation(request):
     context = {'time': datetime.now()}
     if request.method == 'POST':
-        print("Steph testing")
+        selected_sweetness = request.POST["sweetness"]
+        selected_vintage = request.POST["vintage"]
+        selected_body = request.POST["body"]
+        selected_pairing = request.POST["pairing"]
+        selected_quantity = request.POST["quantity"]
+        print("selected sweetness is " + selected_sweetness)
+        print("selected vintage is " + selected_vintage)
+        print("selected_body is " + selected_body)
+        print("selected pairing is " + selected_pairing)
         # call into database using filters
-        result = "french wine, german wine, italian wine, "
-        return render(request, 'myapp/recommendation.html', context={})
+        recommended_wines = utils.get_wines(selected_sweetness, selected_vintage, selected_body, selected_pairing, selected_quantity)
+        print(recommended_wines)
+        return render(request, 'myapp/recommendation.html', {'my_list': recommended_wines})
     else:
         return render(request, 'myapp/recommendation.html', context=context)
+
+# @app.route('/recommendation', methods=['GET', 'POST'])
+# def submit_form():
+#     # Access form data using request.form
+#     quantity = request.form.get('quantity')
+#     # sweetness = request.form.get('sweetness')
+#     # body = request.form.get('body')
+#     # alcohol_content = request.form.get('alcohol-content')
+#     # age = request.form.get('age')
+#     # pairing = request.form.get('pairing')
+#     # Now you can process the form data or store it in a database
+#     # For example, you can generate recommendations based on user input
+#     print("Steph testing")
+#     # call into database using filters
+#     utils.get_wines()
+#     # Return a response, e.g., rendering a template with recommendations
+#     return render_template('myapp/recommendation.html')
+#
+# if __name__ == '__main__':
+#     app.run(debug=True)
