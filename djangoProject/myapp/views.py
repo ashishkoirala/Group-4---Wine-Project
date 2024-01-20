@@ -58,8 +58,10 @@ def wine_recommendation(request):
     if request.method == 'POST':
         form = WinePreferenceForm(request.POST)
         if form.is_valid():
-            # Extract data from the form
-            # ... other form data ...
+            vintage_query = form.cleaned_data.get('vintage')
+            sweetness_query = form.cleaned_data.get('sweetness')
+            body_query = form.cleaned_data.get('body')
+            food_pairing_query = form.cleaned_data.get('food_pairing')
             alcohol_query = form.cleaned_data.get('alcohol_content')
 
             # Fetch all wines
@@ -88,10 +90,22 @@ def wine_recommendation(request):
                     return alcohol_percentage > 15
                 return True  # Include all wines if no specific alcohol query is selected
 
-            wines_filtered = [wine for wine in wines_list if alcohol_filter(wine)]
+            def vintage_filter(wine):
+                return wine.current_vintage == vintage_query
 
-            # ... other filters ...
-            # Apply sweetness, body, and food filters on wines_filtered
+            def sweetness_filter(wine):
+                return wine.sweetness == sweetness_query
+
+            def body_filter(wine):
+                return wine.body == body_query
+
+            def food_pairing_filter(wine):
+                return food_pairing_query in wine.food_pairing
+
+            wines_filtered = [wine for wine in wines_list
+                              if alcohol_filter(wine) and
+                              vintage_filter(wine)
+                              ]
 
             # Get the top-rated wines separately
             top_rated_wines = sorted(wines_filtered, key=lambda wine: wine.rating, reverse=True)[:3]

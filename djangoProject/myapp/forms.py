@@ -4,8 +4,8 @@ from django import forms
 class WinePreferenceForm(forms.Form):
 
     VINTAGE_CHOICES = [
-        ('vintage', 'Vintage'),
-        ('non_vintage', 'Non Vintage'),
+        ('Vintage', 'Vintage'),
+        ('Non Vintage', 'Non Vintage'),
     ]
 
     ALCOHOL_CONTENT_CHOICES = [
@@ -16,25 +16,25 @@ class WinePreferenceForm(forms.Form):
     ]
 
     SWEETNESS_CHOICES = [
-        ('dry', 'Dry'),
-        ('semi_sweet', 'Semi Sweet'),
-        ('sweet', 'Sweet'),
+        ('Dry', 'Dry'),
+        ('Semi Sweet', 'Semi Sweet'),
+        ('Sweet', 'Sweet'),
     ]
 
     BODY_CHOICES = [
-        ('medium_bodied', 'Medium Bodied'),
-        ('light_bodied', 'Light Bodied'),
-        ('full_bodied', 'Full Bodied'),
+        ('Medium Bodied', 'Medium Bodied'),
+        ('Light Bodied', 'Light Bodied'),
+        ('Full Bodied', 'Full Bodied'),
     ]
 
     FOOD_CHOICES = [
-        ('seafood', 'Seafood'),
-        ('beef', 'Beef'),
-        ('game', 'Game'),
-        ('antipasto', 'Antipasto'),
-        ('chicken', 'Chicken'),
-        ('cheese', 'Cheese'),
-        ('lamb', 'Lamb'),
+        ('Seafood', 'Seafood'),
+        ('Beef', 'Beef'),
+        ('Game', 'Game'),
+        ('Antipasto', 'Antipasto'),
+        ('Chicken', 'Chicken'),
+        ('Cheese', 'Cheese'),
+        ('Lamb', 'Lamb'),
         # Add more food choices here if necessary
     ]
 
