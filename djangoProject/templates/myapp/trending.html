@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Trending Wines</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('{% static "images/wine_background.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: #dcdcdc; /* Light gray text color */
+            text-align: center;
+        }
+        .container {
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        }
+        .region-selector {
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px; /* Smaller font size */
+            color: #a52a2a; /* Wine color */
+        }
+        h2 {
+            color: #a52a2a; /* Wine color */
+        }
+        ol {
+            list-style-position: inside;
+        }
+        li {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        select, input[type="submit"] {
+            margin-top: 10px;
+            font-size: 16px;
+            padding: 5px;
+        }
+        .form-container select, .form-container input[type="submit"] {
+            font-size: 16px;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #a52a2a;
+        }
+        .form-container input[type="submit"] {
+            background-color: #a52a2a;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #8b3a3a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="region-selector">
+            <h1>Choose Your Region</h1>
+            <form action="" method="get" class="form-container">
+                <select name="region" id="region">
+                    <option value="US">United States</option>
+                    <option value="FR">France</option>
+                    <option value="IT">Italy</option>
+                    <option value="ES">Spain</option>
+                    <option value="AU">Australia</option>
+                    <!-- Add more regions as needed -->
+                </select>
+                <input type="submit" value="Show Trends">
+            </form>
+        </div>
+
+        <h2>Top 3 Popular Wines in {{ selected_region }}</h2>
+        <ol>
+            {% for wine, score in trending_wines.items %}
+                <li>{{ wine }} (Popularity Score: {{ score }})</li>
+            {% endfor %}
+        </ol>
+    </div>
+</body>
+</html>
