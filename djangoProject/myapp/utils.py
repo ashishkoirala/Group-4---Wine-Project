@@ -12,7 +12,7 @@ def get_wines(selected_sweetness, selected_vintage, selected_body, selected_pair
     recommended = []
     for wine in wines[0:list_length]:
         # delete this if statement if you don't want to check alcohol volume
-        # if (is_alcohol_volume_in_range(selected_alcohol_volume, wine)):
+        if (is_alcohol_volume_in_range(selected_alcohol_volume, wine)):
             wine_info = {"name": wine, "link": wine.product_link, "price": wine.price, "alcohol_content": wine.alcohol_volume}
             recommended.append(wine_info)
     return recommended
